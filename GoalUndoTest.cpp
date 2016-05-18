@@ -19,6 +19,8 @@ TEST(GoalUndoTest, sanityCheck)
 	ASSERT_TRUE(true);
 }
 
+// If empty string is passed as operation name
+// function should return nothing
 TEST(GoalUndoTest, checkForBlankOperationName)
 {
   GoalUndo goalUndoObj;
@@ -27,7 +29,8 @@ TEST(GoalUndoTest, checkForBlankOperationName)
 	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
-TEST(GoalUndoTest, checkForValidOperationAndGoalName)
+//It is used to test whether passed goal and operations are added
+TEST(GoalUndoTest, checkForValidOperationAndGoalNameAdded)
 {
   GoalUndo goalUndoObj;
   goalUndoObj.addOperation("firstGoal","firstOperation");
@@ -35,7 +38,8 @@ TEST(GoalUndoTest, checkForValidOperationAndGoalName)
 	ASSERT_EQ("firstGoal",goalUndoObj.getGoal());
 }
 
-
+// If empty string is passed as Goal name
+// function should return nothing
 TEST(GoalUndoTest, checkForBlankGoalName)
 {
   GoalUndo goalUndoObj;
@@ -44,6 +48,8 @@ TEST(GoalUndoTest, checkForBlankGoalName)
 	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
+//If blank Goal Name and Blank Opertion name is passed
+//The function should return nothing
 TEST(GoalUndoTest, checkAddOperationWithBlankGoalAndOperationName)
 {
   GoalUndo goalUndoObj;
@@ -52,6 +58,7 @@ TEST(GoalUndoTest, checkAddOperationWithBlankGoalAndOperationName)
 	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
+//This function is used to check whether valid operation is getting added
 TEST(GoalUndoTest, checkAllAddOpeartionsWithValidParameters)
 {
   GoalUndo goalUndoObj;
@@ -60,6 +67,7 @@ TEST(GoalUndoTest, checkAllAddOpeartionsWithValidParameters)
 
 	ASSERT_EQ("operation1 operation2",goalUndoObj.getOperations());
 }
+
 
 TEST(GoalUndoTest, checkForAddOp2WithNoGoalName)
 {
@@ -105,10 +113,9 @@ TEST(GoalUndoTest, checkForUndoOperation)
 
 	ASSERT_EQ("",goalUndoObj.getOperations());
 }
-/*************************/
 
-
-
+//It is used to check whether latest added goal will be
+//returned from getGoal function
 TEST(GoalUndoTest, checkForGetGoal)
 {
   GoalUndo goalUndoObj;
@@ -139,7 +146,6 @@ TEST(GoalUndoTest, checkForGetOperationsWithOneOperation)
 
   ASSERT_EQ("operation1",goalUndoObj.getOperations());
 }
-
 
 TEST(GoalUndoTest, checkForNormalUndoOperation2)
 {
