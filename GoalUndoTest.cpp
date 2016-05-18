@@ -21,67 +21,204 @@ TEST(GoalUndoTest, sanityCheck)
 
 TEST(GoalUndoTest, checkForBlankOperationName)
 {
-  GoalUndo obj;
-  obj.addOperation("firstGoal","");
-	ASSERT_EQ("",obj.getGoal());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("firstGoal","");
+
+	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
 TEST(GoalUndoTest, checkForValidOperationAndGoalName)
 {
-  GoalUndo obj;
-  obj.addOperation("firstGoal","firstOP");
-	ASSERT_EQ("firstGoal",obj.getGoal());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("firstGoal","firstOperation");
+
+	ASSERT_EQ("firstGoal",goalUndoObj.getGoal());
 }
 
 
 TEST(GoalUndoTest, checkForBlankGoalName)
 {
-  GoalUndo obj;
-  obj.addOperation("","firstOp");
-	ASSERT_EQ("",obj.getGoal());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("","firstOperation");
+
+	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
 TEST(GoalUndoTest, checkAddOperationWithBlankGoalAndOperationName)
 {
-  GoalUndo obj;
-  obj.addOperation("","");
-	ASSERT_EQ("",obj.getGoal());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("","");
+
+	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
 TEST(GoalUndoTest, checkAllAddOpeartionsWithValidParameters)
 {
-  GoalUndo obj;
-  obj.addOperation("goal1","op1");
-  obj.addOperation("op2");
-	ASSERT_EQ("op1 op2",obj.getOperations());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.addOperation("operation2");
+
+	ASSERT_EQ("operation1 operation2",goalUndoObj.getOperations());
 }
 
-TEST(GoalUndoTest, checkForAddOp2WithEmptyGoalName)
+TEST(GoalUndoTest, checkForAddOp2WithNoGoalName)
 {
-  GoalUndo obj;
-  obj.addOperation("op1");
-	ASSERT_EQ("op1",obj.getGoal());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("operation2");
+
+	ASSERT_EQ("operation2",goalUndoObj.getGoal());
 }
 
 TEST(GoalUndoTest, checkForTwoAddOpeartionsWithOneEmptyOperationName)
 {
-  GoalUndo obj;
-  obj.addOperation("goal1","op1");
-  obj.addOperation("");
-	ASSERT_EQ("op1",obj.getOperations());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.addOperation("");
+
+	ASSERT_EQ("operation1",goalUndoObj.getOperations());
 }
 
-TEST(GoalUndoTest, checkForAddOp2WithEmptyOperationName)
+TEST(GoalUndoTest, checkForAddOp2WithNoOperationName)
 {
-  GoalUndo obj;
-  obj.addOperation("");
-	ASSERT_EQ("",obj.getOperations());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("");
+
+	ASSERT_EQ("",goalUndoObj.getOperations());
 }
+
+TEST(GoalUndoTest, checkForUndoOperationWithNoOperation)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("operation1");
+  goalUndoObj.undoOperation();
+
+  ASSERT_EQ("",goalUndoObj.getOperations());
+	ASSERT_EQ("",goalUndoObj.getGoal());
+}
+
 
 TEST(GoalUndoTest, checkForUndoOperation)
 {
-  GoalUndo obj;
-  obj.addOperation("goal1","op1");
-  obj.undoOperation();
-	ASSERT_EQ("",obj.getOperations());
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.undoOperation();
+
+	ASSERT_EQ("",goalUndoObj.getOperations());
+}
+/*************************/
+
+
+
+TEST(GoalUndoTest, checkForGetGoal)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+	goalUndoObj.addOperation("goal2","operation2");
+
+  ASSERT_EQ("goal2",goalUndoObj.getGoal());
+}
+
+TEST(GoalUndoTest, getGoalNoGoalCheck)
+{
+  GoalUndo goalUndoObj;
+
+  ASSERT_EQ("",goalUndoObj.getGoal());
+}
+
+TEST(GoalUndoTest, checkForGetOperations)
+{
+  GoalUndo goalUndoObj;
+
+  ASSERT_EQ("",goalUndoObj.getOperations());
+}
+
+TEST(GoalUndoTest, checkForGetOperationsWithOneOperation)
+{
+  GoalUndo goalUndoObj;
+	goalUndoObj.addOperation("goal1","operation1");
+
+  ASSERT_EQ("operation1",goalUndoObj.getOperations());
+}
+
+
+TEST(GoalUndoTest, checkForNormalUndoOperation2)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.undoOperation("operation1");
+
+  ASSERT_EQ("",goalUndoObj.getOperations());
+
+}
+
+
+TEST(GoalUndoTest, checkForUndoOpertaion2WithNoGoal)
+{
+  GoalUndo goalUndoObj;
+
+  ASSERT_EQ("",goalUndoObj.getGoal());
+}
+
+TEST(GoalUndoTest, checkForGetOperationsWithValidParameters)
+{
+  GoalUndo goalUndoObj;
+	goalUndoObj.addOperation("goal1","operation1");
+	goalUndoObj.addOperation("operation2");
+	goalUndoObj.addOperation("operation3");
+
+  ASSERT_EQ("operation1 operation2 operation3",goalUndoObj.getOperations());
+}
+
+TEST(GoalUndoTest, checkUndoOpertaion2ForOperations)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.addOperation("operation2");
+	goalUndoObj.undoOperation("operation1");
+
+  ASSERT_EQ("operation2",goalUndoObj.getOperations());
+}
+
+TEST(GoalUndoTest, checkForUndoOperationWithNoGoal)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.undoOperation();
+
+	ASSERT_EQ("",goalUndoObj.getOperations());
+}
+
+
+TEST(GoalUndoTest, checkForUndoGoal)
+{
+  GoalUndo goalUndoObj;
+	goalUndoObj.addOperation("goal1","operation1");
+	goalUndoObj.undoGoal();
+
+  ASSERT_EQ("",goalUndoObj.getGoal());
+}
+
+TEST(GoalUndoTest, checkForUndoGoalWithNoGoal)
+{
+  GoalUndo goalUndoObj;
+	goalUndoObj.undoGoal();
+
+  ASSERT_EQ("",goalUndoObj.getOperations());
+}
+
+TEST(GoalUndoTest, checkForUndoOpertaion2WithGoalOnly)
+{
+  GoalUndo goalUndoObj;
+  goalUndoObj.addOperation("goal1","operation1");
+  goalUndoObj.undoOperation("operation1");
+
+  ASSERT_EQ("",goalUndoObj.getGoal());
+}
+
+TEST(GoalUndoTest, checkUndoGoalForOperations)
+{
+  GoalUndo goalUndoObj;
+	goalUndoObj.addOperation("goal1","operation1");
+	goalUndoObj.undoGoal();
+
+  ASSERT_EQ("",goalUndoObj.getOperations());
 }
