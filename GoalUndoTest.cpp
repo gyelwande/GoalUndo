@@ -38,7 +38,7 @@ TEST(GoalUndoTest, checkForValidOperationAndGoalNameAdded)
 	ASSERT_EQ("firstGoal",goalUndoObj.getGoal());
 }
 
-// If empty string is passed as Goal name
+//If empty string is passed as Goal name
 // function should return nothing
 TEST(GoalUndoTest, checkForBlankGoalName)
 {
@@ -68,7 +68,7 @@ TEST(GoalUndoTest, checkAllAddOpeartionsWithValidParameters)
 	ASSERT_EQ("operation1 operation2",goalUndoObj.getOperations());
 }
 
-
+//This test is used to for add operation without goal Name
 TEST(GoalUndoTest, checkForAddOp2WithNoGoalName)
 {
   GoalUndo goalUndoObj;
@@ -77,6 +77,8 @@ TEST(GoalUndoTest, checkForAddOp2WithNoGoalName)
 	ASSERT_EQ("operation2",goalUndoObj.getGoal());
 }
 
+//This test has two add operations and out of which one is
+//without the operation name
 TEST(GoalUndoTest, checkForTwoAddOpeartionsWithOneEmptyOperationName)
 {
   GoalUndo goalUndoObj;
@@ -104,7 +106,8 @@ TEST(GoalUndoTest, checkForUndoOperationWithNoOperation)
 	ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
-
+//this test is used for undo operation by passing
+//valid goal and operation name
 TEST(GoalUndoTest, checkForUndoOperation)
 {
   GoalUndo goalUndoObj;
@@ -125,13 +128,16 @@ TEST(GoalUndoTest, checkForGetGoal)
   ASSERT_EQ("goal2",goalUndoObj.getGoal());
 }
 
-TEST(GoalUndoTest, getGoalNoGoalCheck)
+//This test is used to check getGoal function by passing
+//empty Goal name
+TEST(GoalUndoTest, checkgetGoalWithNoGoalName)
 {
   GoalUndo goalUndoObj;
 
   ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
+//This test is used to check  getOperations function
 TEST(GoalUndoTest, checkForGetOperations)
 {
   GoalUndo goalUndoObj;
@@ -147,6 +153,8 @@ TEST(GoalUndoTest, checkForGetOperationsWithOneOperation)
   ASSERT_EQ("operation1",goalUndoObj.getOperations());
 }
 
+//This test is used to test for normal addOperation
+//and then call undoOperation to test whether correct operation is get returned
 TEST(GoalUndoTest, checkForNormalUndoOperation2)
 {
   GoalUndo goalUndoObj;
@@ -203,6 +211,7 @@ TEST(GoalUndoTest, checkForUndoGoal)
   ASSERT_EQ("",goalUndoObj.getGoal());
 }
 
+//This test is used to check for empty Goal
 TEST(GoalUndoTest, checkForUndoGoalWithNoGoal)
 {
   GoalUndo goalUndoObj;
@@ -219,7 +228,9 @@ TEST(GoalUndoTest, checkForUndoOpertaion2WithGoalOnly)
 
   ASSERT_EQ("",goalUndoObj.getGoal());
 }
-
+//this test is used for getting operations once add operation is done
+//and undoGoal method is called and test whether added operation or empty string
+//is returned
 TEST(GoalUndoTest, checkUndoGoalForOperations)
 {
   GoalUndo goalUndoObj;
